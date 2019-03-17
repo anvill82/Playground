@@ -2,39 +2,33 @@ package com.springinaction.springidol.impl;
 
 import com.springinaction.springidol.Instrument;
 import com.springinaction.springidol.Performer;
+import com.springinaction.springidol.Song;
+import com.springinaction.springidol.StringedInstrument;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Instrumentalist implements Performer, Instrument {
     public Instrumentalist() {
     }
 
-    private String song;
+    @Autowired(required = false)
+    private Song song;
 
-    public void setSong(String song) {
-        this.song = song;
-    }
-
-    public String getSong() {
-        return song;
-    }
-
-    public String screamSong() {
-        return song;
-    }
-
+//    @StringedInstrument
+    @Autowired(required = false)
     private Instrument instrument;
 
-    public void setInstrument(Instrument instrument) {
-        this.instrument = instrument;
-    }
+
 
     @Override
     public void perform() {
-        System.out.println("Playing... " + song + " : ");
+        song.sing();
         instrument.play();
     }
 
     @Override
     public void play() {
-
     }
 }

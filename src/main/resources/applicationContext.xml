@@ -15,11 +15,12 @@
 
     <bean id="sonnet29" class="com.springinaction.springidol.impl.Sonnet29PoemImpl"/>
     <bean id="instrument" class="com.springinaction.springidol.impl.SaxInstrumentImpl"/>
+    <bean id="guitar" class="com.springinaction.springidol.impl.GuitarImpl"/>
+    <bean id="song" class="com.springinaction.springidol.impl.SongImpl"/>
     <bean id="piano" class="com.springinaction.springidol.impl.PianoInstrumentImpl"/>
-
     <bean id="theStage" class="com.springinaction.springidol.impl.Stage" factory-method="getInstance"/>
     <bean id="ticket" class="com.springinaction.springidol.impl.Ticket">
-        <property name="cat" value="${some.key}"/>
+        <property name="owner" value="${some.key}"/>
     </bean>
     <bean id="auditorium" class="com.springinaction.springidol.impl.Auditorium"
           init-method="turnOnLights"
@@ -30,21 +31,7 @@
         <constructor-arg name="poem" ref="sonnet29"/>
     </bean>
 
-    <bean id="kenny"
-          class="com.springinaction.springidol.impl.Instrumentalist"
-          autowire="byName">
-        <property name="song" value="Jingle Bells"/>
-    </bean>
+    <bean id="kenny" class="com.springinaction.springidol.impl.Instrumentalist"/>
 
-    <bean id="hank" class="com.springinaction.springidol.impl.OneManBandPerformerImpl" autowire="byName">
-        <property name="instruments">
-            <list>
-                <ref bean="piano"/>
-            </list>
-        </property>
-    </bean>
-    <!--   <bean id="Carl" class="com.springinaction.springidol.impl.Instrumentalist">
-           <property name="song" value="#{Kenny.song}"/>
-           <property name="instrument" ref="#{Kenny.instrument}"/>
-       </bean>-->
+
 </beans>

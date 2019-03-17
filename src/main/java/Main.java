@@ -11,13 +11,12 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
-/*
         Performer performer = context.getBean("kenny", Instrumentalist.class);
         performer.perform();
-*/
 
-        Ticket ticket = context.getBean("ticket", Ticket.class);
-        System.out.println(ticket.getCat());
+
+//        Ticket ticket = context.getBean("ticket", Ticket.class);
+//        System.out.println(ticket.getCat());
         //System.out.println(ticket.getOwner2());
 
 
