@@ -6,38 +6,45 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd"
-            default-init-method="turnOnLights">
+       default-init-method="turnOnLights">
 
     <context:component-scan base-package="com"></context:component-scan>
+    <context:property-placeholder location="some.properties"/>
+
+    <bean id="propertyConfig" class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"/>
 
     <bean id="sonnet29" class="com.springinaction.springidol.impl.Sonnet29PoemImpl"/>
-    <bean id="sax" class="com.springinaction.springidol.impl.SaxInstrumentImpl"/>
+    <bean id="instrument" class="com.springinaction.springidol.impl.SaxInstrumentImpl"/>
     <bean id="piano" class="com.springinaction.springidol.impl.PianoInstrumentImpl"/>
 
     <bean id="theStage" class="com.springinaction.springidol.impl.Stage" factory-method="getInstance"/>
-    <bean id="ticket" class="com.springinaction.springidol.impl.Ticket" scope="prototype"/>
+    <bean id="ticket" class="com.springinaction.springidol.impl.Ticket">
+        <property name="cat" value="${some.key}"/>
+    </bean>
     <bean id="auditorium" class="com.springinaction.springidol.impl.Auditorium"
           init-method="turnOnLights"
           destroy-method="turnOffLights"/>
 
-    <bean id="Duke" class="com.springinaction.springidol.impl.PoeticJugglerPerformerImpl">
+    <bean id="duke" class="com.springinaction.springidol.impl.PoeticJugglerPerformerImpl">
         <constructor-arg name="beanBags" value="15"/>
         <constructor-arg name="poem" ref="sonnet29"/>
     </bean>
-    <bean id="Kenny" class="com.springinaction.springidol.impl.Instrumentalist">
+
+    <bean id="kenny"
+          class="com.springinaction.springidol.impl.Instrumentalist"
+          autowire="byName">
         <property name="song" value="Jingle Bells"/>
-        <property name="instrument" ref="piano"/>
     </bean>
-    <bean id="Hank" class="com.springinaction.springidol.impl.OneManBandPerformerImpl">
+
+    <bean id="hank" class="com.springinaction.springidol.impl.OneManBandPerformerImpl" autowire="byName">
         <property name="instruments">
             <list>
-                <ref bean="sax"/>
                 <ref bean="piano"/>
             </list>
         </property>
     </bean>
-    <bean id="Carl" class="com.springinaction.springidol.impl.Instrumentalist">
-        <property name="song" value="#{Kenny.song}"/>
-        <property name="instrument" ref="#{Kenny.instrument}"/>
-    </bean>
+    <!--   <bean id="Carl" class="com.springinaction.springidol.impl.Instrumentalist">
+           <property name="song" value="#{Kenny.song}"/>
+           <property name="instrument" ref="#{Kenny.instrument}"/>
+       </bean>-->
 </beans>
