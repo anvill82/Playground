@@ -15,6 +15,7 @@ def springVersion= '4.2.1.RELEASE'
 
 dependencies {
     compile(group: 'org.springframework', name: 'spring-core', version: "$springVersion")
+    compile(group: 'org.springframework', name: 'spring-core', version: "$springVersion")
     compile(group: 'org.springframework', name: 'spring-beans', version: "$springVersion")
     compile(group: 'org.springframework', name: 'spring-context', version: "$springVersion")
     compile(group: 'org.springframework', name: 'spring-aop', version: "$springVersion")

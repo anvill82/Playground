@@ -1,4 +1,5 @@
-rootProject.name = 'TextGames'
+rootProject.name = 'Playground'
 include 'Spitter'
 include 'SpringIdol'
+include 'DBTesting'
 
